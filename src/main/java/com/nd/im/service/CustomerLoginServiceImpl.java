@@ -3,7 +3,7 @@ package com.nd.im.service;
 import com.nd.im.config.ActionGroupNames;
 import com.nd.im.config.ActionNames;
 import com.nd.im.config.ResponseFlags;
-import com.nd.im.entity.ServiceUserEntity;
+import com.nd.im.entity.CustomerEntity;
 import com.nd.im.localservice.ServiceUserLocalService;
 import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
@@ -21,41 +21,33 @@ import com.wolf.framework.worker.context.MessageContext;
  * @author aladdin
  */
 @ServiceConfig(
-        actionName = ActionNames.ADMIN_LOGIN,
+        actionName = ActionNames.CUSTOMER_LOGIN,
         importantParameter = {
-    @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @InputConfig(name = "password", typeEnum = TypeEnum.CHAR_32, desc = "密码")
+    @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id")
 },
         returnParameter = {
     @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
-    @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
+    @OutputConfig(name = "nickName", typeEnum = TypeEnum.CHAR_32, desc = "昵称")
 },
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
         response = true,
         group = ActionGroupNames.IM,
-        description = "管理员登录")
-public class AdminLoginServiceImpl implements Service {
-
+        description = "客户用户登录")
+public class CustomerLoginServiceImpl implements Service {
+    
     @InjectLocalService()
     private ServiceUserLocalService serviceUserLocalService;
-
+    
     @Override
     public void execute(MessageContext messageContext) {
         String userId = messageContext.getParameter("userId");
-        String password = messageContext.getParameter("password");
-        if (userId.equals(ServiceUserLocalService.adminUserId)) {
-            ServiceUserEntity adminUserEntity = this.serviceUserLocalService.inquireServerUserByUserId(userId);
-            if (adminUserEntity.getPassword().equals(password)) {
-                //登录成功
-                Session session = new SessionImpl(userId);
-                messageContext.setNewSession(session);
-                messageContext.setEntityData(adminUserEntity);
-                messageContext.success();
-            } else {
-                messageContext.setFlag(ResponseFlags.FAILURE_PASSWORD_ERROR);
-            }
+        CustomerEntity entity = this.serviceUserLocalService.inquireCustomerByUserId(userId);
+        if (entity != null) {
+            Session session = new SessionImpl(userId);
+            messageContext.setNewSession(session);
+            messageContext.setEntityData(entity);
+            messageContext.success();
         } else {
             messageContext.setFlag(ResponseFlags.FAILURE_USER_ID_NOT_EXIST);
         }

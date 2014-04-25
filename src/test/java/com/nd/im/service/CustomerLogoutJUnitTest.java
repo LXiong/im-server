@@ -2,8 +2,8 @@ package com.nd.im.service;
 
 import com.nd.im.AbstractImTest;
 import com.nd.im.config.ActionNames;
-import com.nd.im.localservice.ServiceUserLocalService;
-import com.wolf.framework.utils.SecurityUtils;
+import com.wolf.framework.session.Session;
+import com.wolf.framework.session.SessionImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -14,9 +14,9 @@ import org.junit.Test;
  *
  * @author aladdin
  */
-public class AdminLoginJUnitTest extends AbstractImTest {
+public class CustomerLogoutJUnitTest extends AbstractImTest {
 
-    public AdminLoginJUnitTest() {
+    public CustomerLogoutJUnitTest() {
     }
 
     @Before
@@ -30,10 +30,11 @@ public class AdminLoginJUnitTest extends AbstractImTest {
 
     @Test
     public void test() {
+        Session session = new SessionImpl("1158174740");
+        this.testHandler.setSession(session);
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("userId", "10000");
-        parameterMap.put("password", SecurityUtils.encryptByMd5(ServiceUserLocalService.adminUserName));
-        String result = this.testHandler.execute(ActionNames.ADMIN_LOGIN, parameterMap);
+        parameterMap.put("serviceId", "271411");
+        String result = this.testHandler.execute(ActionNames.CUSTOMER_LOGOUT, parameterMap);
         System.out.println(result);
     }
 }

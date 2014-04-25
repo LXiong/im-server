@@ -17,11 +17,23 @@ public class ActionNames {
     //管理员登录
     public final static String ADMIN_LOGIN = "ADMIN_LOGIN";
     //普通用户登录
-    public final static String LOGIN = "LOGIN";
+    public final static String SERVICE_LOGIN = "SERVICE_LOGIN";
     //登出
-    public final static String LOGOUT = "LOGOUT";
+    public final static String SERVICE_LOGOUT = "SERVICE_LOGOUT";
     //新增客服用户
-    public final static String INSERT_SERVER_USER = "INSERT_SERVER_USER";
+    public final static String INSERT_SERVICE_USER = "INSERT_SERVICE_USER";
     //查询客服用户
-    public final static String INQUIRE_SERVER_USER = "INQUIRE_SERVER_USER";
+    public final static String INQUIRE_SERVICE_USER = "INQUIRE_SERVICE_USER";
+    //----------------------------客户接口---------------------------//
+    //随机查询
+    public final static String INQUIRE_CUSTOMER = "INQUIRE_CUSTOMER";
+    //客户登录
+    public final static String CUSTOMER_LOGIN = "CUSTOMER_LOGIN";
+    //客户登出
+    public final static String CUSTOMER_LOGOUT = "CUSTOMER_LOGOUT";
+    //请求客服
+    public final static String CONNECT_SERVICE   = "CONNECT_SERVICE";
+    //-----------------------------消息------------------------------//
+    //发送消息
+    public final static String SEND_MESSAGE   = "SEND_MESSAGE";
 }

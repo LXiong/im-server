@@ -29,7 +29,7 @@ public class InquireServerUserJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        String result = this.testHandler.execute(ActionNames.INQUIRE_SERVER_USER, parameterMap);
+        String result = this.testHandler.execute(ActionNames.INQUIRE_SERVICE_USER, parameterMap);
         System.out.println(result);
     }
 }

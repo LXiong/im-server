@@ -2,8 +2,8 @@ package com.nd.im.service;
 
 import com.nd.im.config.ActionGroupNames;
 import com.nd.im.config.ActionNames;
-import com.nd.im.entity.ServerUserEntity;
-import com.nd.im.localservice.ServerUserLocalService;
+import com.nd.im.entity.ServiceUserEntity;
+import com.nd.im.localservice.ServiceUserLocalService;
 import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
@@ -18,7 +18,7 @@ import com.wolf.framework.worker.context.MessageContext;
  * @author aladdin
  */
 @ServiceConfig(
-        actionName = ActionNames.LOGOUT,
+        actionName = ActionNames.SERVICE_LOGOUT,
         returnParameter = {
     @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
     @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
@@ -29,19 +29,21 @@ import com.wolf.framework.worker.context.MessageContext;
         response = true,
         group = ActionGroupNames.IM,
         description = "用户登出")
-public class LogoutServiceImpl implements Service {
+public class ServiceLogoutServiceImpl implements Service {
 
     @InjectLocalService()
-    private ServerUserLocalService serverUserLocalService;
+    private ServiceUserLocalService serviceUserLocalService;
 
     @Override
     public void execute(MessageContext messageContext) {
         Session session = messageContext.getSession();
         messageContext.setNewSession(null);
-        ServerUserEntity userEntity = this.serverUserLocalService.inquireServerUserByUserId(session.getUserId());
+        ServiceUserEntity userEntity = this.serviceUserLocalService.inquireServerUserByUserId(session.getUserId());
         if (userEntity != null) {
             messageContext.setEntityData(userEntity);
             messageContext.success();
+            //记录登出状态
+            this.serviceUserLocalService.offline(userEntity.getUserId());
         }
     }
 }

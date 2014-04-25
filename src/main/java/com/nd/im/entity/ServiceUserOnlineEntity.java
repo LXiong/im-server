@@ -14,37 +14,30 @@ import java.util.Map;
  * @author aladdin
  */
 @RDaoConfig(
-        tableName = TableNames.SERVER_USER)
-public final class ServerUserEntity extends Entity {
+        tableName = TableNames.SERVER_USER_ONLINE)
+public final class ServiceUserOnlineEntity extends Entity {
 
-    @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户")
+    @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户id")
     private String userId;
     //
-    @RColumnConfig(desc = "客服名称")
+    @RColumnConfig(desc = "状态")
+    private String state;
+    //
+    @RColumnConfig(desc = "名称")
     private String userName;
-    //
-    @RColumnConfig(desc = "密码")
-    private String password;
-    //
-    @RColumnConfig(desc = "客服类型:ADMIN-管理员,LEADER-组长,MEMBER-一般客服人员")
-    private String tpye;
 
     public String getUserId() {
         return userId;
     }
 
+    public String getState() {
+        return state;
+    }
+
     public String getUserName() {
         return userName;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getTpye() {
-        return tpye;
-    }
-
+    
     @Override
     public String getKeyValue() {
         return this.userId;
@@ -54,17 +47,15 @@ public final class ServerUserEntity extends Entity {
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<String, String>(4, 1);
         map.put("userId", this.userId);
+        map.put("state", this.state);
         map.put("userName", this.userName);
-        map.put("password", this.password);
-        map.put("tpye", this.tpye);
         return map;
     }
 
     @Override
     protected void parseMap(Map<String, String> entityMap) {
         this.userId = entityMap.get("userId");
+        this.state = entityMap.get("state");
         this.userName = entityMap.get("userName");
-        this.password = entityMap.get("password");
-        this.tpye = entityMap.get("tpye");
     }
 }

@@ -32,7 +32,7 @@ public class InsertServerUserJUnitTest extends AbstractImTest {
         parameterMap.put("userId", "271411");
         parameterMap.put("userName", "jianying");
         parameterMap.put("type", "MEMBER");
-        String result = this.testHandler.execute(ActionNames.INSERT_SERVER_USER, parameterMap);
+        String result = this.testHandler.execute(ActionNames.INSERT_SERVICE_USER, parameterMap);
         System.out.println(result);
     }
 }

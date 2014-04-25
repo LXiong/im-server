@@ -4,7 +4,7 @@ package com.nd.im.entity;
  *
  * @author jianying9
  */
-public enum ServerUserTypeEnum {
+public enum ServiceUserTypeEnum {
 
     ADMIN,
     LEADER,

@@ -3,8 +3,8 @@ package com.nd.im.service;
 import com.nd.im.config.ActionGroupNames;
 import com.nd.im.config.ActionNames;
 import com.nd.im.config.ResponseFlags;
-import com.nd.im.entity.ServerUserEntity;
-import com.nd.im.localservice.ServerUserLocalService;
+import com.nd.im.entity.ServiceUserEntity;
+import com.nd.im.localservice.ServiceUserLocalService;
 import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
@@ -21,7 +21,7 @@ import com.wolf.framework.worker.context.MessageContext;
  * @author aladdin
  */
 @ServiceConfig(
-        actionName = ActionNames.LOGIN,
+        actionName = ActionNames.SERVICE_LOGIN,
         importantParameter = {
     @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id")
 },
@@ -35,20 +35,22 @@ import com.wolf.framework.worker.context.MessageContext;
         response = true,
         group = ActionGroupNames.IM,
         description = "用户登录")
-public class LoginServiceImpl implements Service {
+public class ServiceLoginServiceImpl implements Service {
 
     @InjectLocalService()
-    private ServerUserLocalService serverUserLocalService;
+    private ServiceUserLocalService serviceUserLocalService;
 
     @Override
     public void execute(MessageContext messageContext) {
         String userId = messageContext.getParameter("userId");
-        ServerUserEntity userEntity = this.serverUserLocalService.inquireServerUserByUserId(userId);
+        ServiceUserEntity userEntity = this.serviceUserLocalService.inquireServerUserByUserId(userId);
         if (userEntity != null) {
             Session session = new SessionImpl(userId);
             messageContext.setNewSession(session);
             messageContext.setEntityData(userEntity);
             messageContext.success();
+            //记录登录状态
+            this.serviceUserLocalService.online(userEntity);
         } else {
             messageContext.setFlag(ResponseFlags.FAILURE_USER_ID_NOT_EXIST);
         }

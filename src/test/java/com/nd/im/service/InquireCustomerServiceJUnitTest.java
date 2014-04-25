@@ -2,8 +2,6 @@ package com.nd.im.service;
 
 import com.nd.im.AbstractImTest;
 import com.nd.im.config.ActionNames;
-import com.nd.im.localservice.ServiceUserLocalService;
-import com.wolf.framework.utils.SecurityUtils;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -14,9 +12,9 @@ import org.junit.Test;
  *
  * @author aladdin
  */
-public class AdminLoginJUnitTest extends AbstractImTest {
+public class InquireCustomerServiceJUnitTest extends AbstractImTest {
 
-    public AdminLoginJUnitTest() {
+    public InquireCustomerServiceJUnitTest() {
     }
 
     @Before
@@ -31,9 +29,7 @@ public class AdminLoginJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("userId", "10000");
-        parameterMap.put("password", SecurityUtils.encryptByMd5(ServiceUserLocalService.adminUserName));
-        String result = this.testHandler.execute(ActionNames.ADMIN_LOGIN, parameterMap);
+        String result = this.testHandler.execute(ActionNames.INQUIRE_CUSTOMER, parameterMap);
         System.out.println(result);
     }
 }

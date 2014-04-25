@@ -12,4 +12,6 @@ public class ResponseFlags {
     public final static String FAILURE_PASSWORD_ERROR = "FAILURE_PASSWORD_ERROR";
     //userId已经被使用
     public final static String FAILURE_USER_ID_USED = "FAILURE_USER_ID_USED";
+    //没有客服，等待
+    public final static String FAILURE_WAIT = "FAILURE_WAIT";
 }
