@@ -45,7 +45,7 @@ public class ConnectServiceImpl implements Service {
             Map<String, String> resultMap = new HashMap<String, String>(4, 1);
             resultMap.put("serviceId", serviceEntity.getUserId());
             resultMap.put("serviceName", serviceEntity.getUserName());
-            String userId = messageContext.getSession().getUserId();
+            String userId = messageContext.getSession().getSid();
             CustomerEntity customerEntity = this.serviceUserLocalService.inquireCustomerByUserId(userId);
             String nickName = customerEntity.getNickName();
             resultMap.put("userId", userId);

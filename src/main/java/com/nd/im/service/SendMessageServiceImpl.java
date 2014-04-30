@@ -2,9 +2,6 @@ package com.nd.im.service;
 
 import com.nd.im.config.ActionGroupNames;
 import com.nd.im.config.ActionNames;
-import com.nd.im.config.ResponseFlags;
-import com.nd.im.entity.CustomerEntity;
-import com.nd.im.entity.ServiceUserOnlineEntity;
 import com.nd.im.localservice.ServiceUserLocalService;
 import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
@@ -50,7 +47,7 @@ public class SendMessageServiceImpl implements Service {
     @Override
     public void execute(MessageContext messageContext) {
         Session session = messageContext.getSession();
-        String userId = session.getUserId();
+        String userId = session.getSid();
         Map<String, String> parameterMap = messageContext.getParameterMap();
         long messageId = this.messageIdAtomic.incrementAndGet();
         String receiveId = parameterMap.get("receiveId");

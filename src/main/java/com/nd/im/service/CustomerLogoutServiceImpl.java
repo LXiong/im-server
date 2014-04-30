@@ -40,7 +40,7 @@ public class CustomerLogoutServiceImpl implements Service {
     
     @Override
     public void execute(MessageContext messageContext) {
-        String userId = messageContext.getSession().getUserId();
+        String userId = messageContext.getSession().getSid();
         messageContext.setNewSession(null);
         String serviceId = messageContext.getParameter("serviceId");
         Map<String, String> resultMap = new HashMap<String, String>(2, 1);

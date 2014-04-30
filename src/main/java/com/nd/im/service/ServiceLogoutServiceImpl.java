@@ -38,7 +38,7 @@ public class ServiceLogoutServiceImpl implements Service {
     public void execute(MessageContext messageContext) {
         Session session = messageContext.getSession();
         messageContext.setNewSession(null);
-        ServiceUserEntity userEntity = this.serviceUserLocalService.inquireServerUserByUserId(session.getUserId());
+        ServiceUserEntity userEntity = this.serviceUserLocalService.inquireServerUserByUserId(session.getSid());
         if (userEntity != null) {
             messageContext.setEntityData(userEntity);
             messageContext.success();
