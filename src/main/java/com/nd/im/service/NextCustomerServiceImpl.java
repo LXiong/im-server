@@ -24,7 +24,7 @@ import java.util.Map;
         actionName = ActionNames.NEXT_CUSTOMER,
         returnParameter = {
     @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "nickName", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
+    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
     @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
     @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "客服昵称")
 },
@@ -47,14 +47,14 @@ public class NextCustomerServiceImpl implements Service {
         if (customerWaitEntity != null) {
             String sid = messageContext.getSession().getSid();
             String serviceId = SessionUtils.getServiceUserIdFromSessionId(sid);
-            ServiceEntity serviceEntity = this.serviceUserLocalService.inquireServiceByUserId(serviceId);
+            ServiceEntity serviceEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
             Map<String, String> resultMap = new HashMap<String, String>(4, 1);
             resultMap.put("serviceId", serviceId);
-            resultMap.put("serviceName", serviceEntity.getUserName());
-            resultMap.put("customerId", customerWaitEntity.getUserId());
-            resultMap.put("nickName", customerWaitEntity.getNickName());
+            resultMap.put("serviceName", serviceEntity.getServiceName());
+            resultMap.put("customerId", customerWaitEntity.getCustomerId());
+            resultMap.put("customerName", customerWaitEntity.getCustomerName());
             messageContext.setMapData(resultMap);
-            String customerSid = SessionUtils.createCustomerSessionId(customerWaitEntity.getUserId());
+            String customerSid = SessionUtils.createCustomerSessionId(customerWaitEntity.getCustomerId());
             messageContext.addBroadcastSid(customerSid);
             messageContext.success();
         }

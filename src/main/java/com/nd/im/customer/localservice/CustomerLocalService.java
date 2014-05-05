@@ -16,17 +16,17 @@ public interface CustomerLocalService extends Local {
 
     public CustomerEntity inquireCustomer();
 
-    public CustomerEntity inquireCustomerByUserId(String userId);
+    public CustomerEntity inquireCustomerById(String customerId);
 
     public long countCustomerWaitNum();
 
-    public void insertCustomerWait(String userId, String nickName, String createTime);
+    public void insertCustomerWait(String customerId, String customerName, String createTime);
     
-    public CustomerWaitEntity inquireCustomerWaitByUserId(String userId);
+    public CustomerWaitEntity inquireCustomerWaitById(String customerId);
 
     public CustomerWaitEntity nextCustomerWait();
     
-    public void deleteCustomerWait(String userId);
+    public void deleteCustomerWait(String customerId);
     
     public List<CustomerWaitEntity> inquireCustomerWait(long pageIndex, long pageSize);
 }

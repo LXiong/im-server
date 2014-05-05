@@ -31,7 +31,7 @@ public class AdminLoginJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("userId", "10000");
+        parameterMap.put("serviceId", "10000");
         parameterMap.put("password", SecurityUtils.encryptByMd5(ServiceLocalService.adminUserName));
         String result = this.testHandler.execute(ActionNames.ADMIN_LOGIN, parameterMap);
         System.out.println(result);

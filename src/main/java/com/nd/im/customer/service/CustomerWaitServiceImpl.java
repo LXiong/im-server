@@ -21,8 +21,8 @@ import java.util.Map;
 @ServiceConfig(
         actionName = ActionNames.CUSTOMER_WAIT,
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "nickName", typeEnum = TypeEnum.CHAR_32, desc = "昵称"),
+    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称"),
     @OutputConfig(name = "waitNum", typeEnum = TypeEnum.LONG, desc = "等待人数"),
     @OutputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "排队序号")
 },
@@ -40,14 +40,14 @@ public class CustomerWaitServiceImpl implements Service {
     public void execute(MessageContext messageContext) {
         String sid = messageContext.getSession().getSid();
         String customerId = SessionUtils.getCustomerUserIdFromSessionId(sid);
-        CustomerEntity customerEntity = this.customerLocalService.inquireCustomerByUserId(customerId);
-        String nickName = customerEntity.getNickName();
+        CustomerEntity customerEntity = this.customerLocalService.inquireCustomerById(customerId);
+        String customerName = customerEntity.getCustomerName();
         long waitNum = this.customerLocalService.countCustomerWaitNum();
         String createTime = Long.toString(System.currentTimeMillis());
-        this.customerLocalService.insertCustomerWait(customerId, nickName, createTime);
+        this.customerLocalService.insertCustomerWait(customerId, customerName, createTime);
         Map<String, String> resultMap = new HashMap<String, String>(4, 1);
-        resultMap.put("userId", customerId);
-        resultMap.put("nickName", nickName);
+        resultMap.put("customerId", customerId);
+        resultMap.put("nickName", customerName);
         resultMap.put("waitNum", Long.toString(waitNum));
         resultMap.put("waitOrder", createTime);
         messageContext.setMapData(resultMap);

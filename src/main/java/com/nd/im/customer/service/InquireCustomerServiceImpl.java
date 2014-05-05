@@ -18,8 +18,8 @@ import com.wolf.framework.worker.context.MessageContext;
 @ServiceConfig(
         actionName = ActionNames.INQUIRE_CUSTOMER,
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "nickName", typeEnum = TypeEnum.CHAR_32, desc = "名称")
+    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "名称")
 },
         validateSession = false,
         response = true,

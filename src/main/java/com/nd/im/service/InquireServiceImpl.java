@@ -19,8 +19,8 @@ import java.util.List;
 @ServiceConfig(
         actionName = ActionNames.INQUIRE_SERVICE,
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
+    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
+    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
     @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
 },
         validateSession = true,

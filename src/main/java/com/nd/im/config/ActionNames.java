@@ -5,6 +5,7 @@ package com.nd.im.config;
  * @author aladdin
  */
 public class ActionNames {
+    public final static String UPDATE = "UPDATE";
     //-----------------------文件------------------------//
     //保存图片
 
@@ -22,6 +23,8 @@ public class ActionNames {
     public final static String INSERT_SERVICE = "INSERT_SERVICE";
     //查询客服用户
     public final static String INQUIRE_SERVICE = "INQUIRE_SERVICE";
+    //删除客服用户
+    public final static String DELETE_SERVICE = "DELETE_SERVICE";
     //获取下一个等待的客户
     public final static String NEXT_CUSTOMER = "NEXT_CUSTOMER";
     //----------------------------客户接口---------------------------//
@@ -35,7 +38,7 @@ public class ActionNames {
     public final static String CUSTOMER_WAIT = "CUSTOMER_WAIT";
     //-----------------------------消息------------------------------//
     //客户发送消息至客服
-    public final static String SEND_MESSAGE_FROME_CUSTOMER = "SEND_MESSAGE_FROME_CUSTOMER";
+    public final static String SEND_MESSAGE_FROM_CUSTOMER = "SEND_MESSAGE_FROM_CUSTOMER";
     //客服发送消息至客户
     public final static String SEND_MESSAGE_FROM_SERVICE = "SEND_MESSAGE_FROM_SERVICE";
 }

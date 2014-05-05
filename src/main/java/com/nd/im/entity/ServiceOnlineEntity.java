@@ -18,44 +18,44 @@ import java.util.Map;
 public final class ServiceOnlineEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户id")
-    private String userId;
+    private String serviceId;
     //
     @RColumnConfig(desc = "状态")
     private String state;
     //
     @RColumnConfig(desc = "名称")
-    private String userName;
+    private String serviceName;
 
-    public String getUserId() {
-        return userId;
+    public String getServiceId() {
+        return serviceId;
     }
 
     public String getState() {
         return state;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getServiceName() {
+        return serviceName;
     }
     
     @Override
     public String getKeyValue() {
-        return this.userId;
+        return this.serviceId;
     }
 
     @Override
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<String, String>(4, 1);
-        map.put("userId", this.userId);
+        map.put("serviceId", this.serviceId);
         map.put("state", this.state);
-        map.put("userName", this.userName);
+        map.put("serviceName", this.serviceName);
         return map;
     }
 
     @Override
     protected void parseMap(Map<String, String> entityMap) {
-        this.userId = entityMap.get("userId");
+        this.serviceId = entityMap.get("serviceId");
         this.state = entityMap.get("state");
-        this.userName = entityMap.get("userName");
+        this.serviceName = entityMap.get("serviceName");
     }
 }

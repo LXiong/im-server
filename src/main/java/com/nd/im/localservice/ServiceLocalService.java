@@ -17,7 +17,9 @@ public interface ServiceLocalService extends Local {
 
     public void insertService(Map<String, String> entityMap);
 
-    public ServiceEntity inquireServiceByUserId(String userId);
+    public ServiceEntity inquireServiceById(String serviceId);
+    
+    public void deleteService(String serviceId);
 
     public List<ServiceEntity> inquireService(long pageIndex, long pageSize);
 
@@ -27,7 +29,7 @@ public interface ServiceLocalService extends Local {
 
     public void online(ServiceEntity entity);
 
-    public void offline(String userId);
+    public void offline(String serviceId);
 
     public ServiceOnlineEntity inquireOnlineService();
 }

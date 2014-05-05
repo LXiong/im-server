@@ -30,8 +30,8 @@ public class InsertServiceJUnitTest extends AbstractImTest {
     public void test() {
         this.setServiceSession("10000");
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("userId", "271411");
-        parameterMap.put("userName", "jianying");
+        parameterMap.put("serviceId", "271411");
+        parameterMap.put("serviceName", "jianying");
         parameterMap.put("type", "MEMBER");
         String result = this.testHandler.execute(ActionNames.INSERT_SERVICE, parameterMap);
         System.out.println(result);

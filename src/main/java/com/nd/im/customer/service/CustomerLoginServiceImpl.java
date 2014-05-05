@@ -24,11 +24,11 @@ import com.wolf.framework.worker.context.MessageContext;
 @ServiceConfig(
         actionName = ActionNames.CUSTOMER_LOGIN,
         importantParameter = {
-    @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id")
+    @InputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id")
 },
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "nickName", typeEnum = TypeEnum.CHAR_32, desc = "昵称")
+    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称")
 },
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
@@ -42,16 +42,16 @@ public class CustomerLoginServiceImpl implements Service {
 
     @Override
     public void execute(MessageContext messageContext) {
-        String userId = messageContext.getParameter("userId");
-        CustomerEntity entity = this.customerLocalService.inquireCustomerByUserId(userId);
+        String customerId = messageContext.getParameter("customerId");
+        CustomerEntity entity = this.customerLocalService.inquireCustomerById(customerId);
         if (entity != null) {
-            String sid = SessionUtils.createCustomerSessionId(userId);
+            String sid = SessionUtils.createCustomerSessionId(customerId);
             Session session = new SessionImpl(sid);
             messageContext.setNewSession(session);
             messageContext.setEntityData(entity);
             messageContext.success();
         } else {
-            messageContext.setFlag(ResponseFlags.FAILURE_USER_ID_NOT_EXIST);
+            messageContext.setFlag(ResponseFlags.FAILURE_ID_NOT_EXIST);
         }
     }
 }

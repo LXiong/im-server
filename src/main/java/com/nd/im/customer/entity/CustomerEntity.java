@@ -18,35 +18,35 @@ import java.util.Map;
 public final class CustomerEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客户用户id")
-    private String userId;
+    private String customerId;
     //
     @RColumnConfig(desc = "昵称")
-    private String nickName;
+    private String customerName;
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getCustomerName() {
+        return customerName;
     }
 
     @Override
     public String getKeyValue() {
-        return this.userId;
+        return this.customerId;
     }
 
     @Override
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<String, String>(2, 1);
-        map.put("userId", this.userId);
-        map.put("nickName", this.nickName);
+        map.put("customerId", this.customerId);
+        map.put("customerName", this.customerName);
         return map;
     }
 
     @Override
     protected void parseMap(Map<String, String> entityMap) {
-        this.userId = entityMap.get("userId");
-        this.nickName = entityMap.get("nickName");
+        this.customerId = entityMap.get("customerId");
+        this.customerName = entityMap.get("customerName");
     }
 }

@@ -2,8 +2,6 @@ package com.nd.im.customer.service;
 
 import com.nd.im.AbstractImTest;
 import com.nd.im.config.ActionNames;
-import com.wolf.framework.session.Session;
-import com.wolf.framework.session.SessionImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;

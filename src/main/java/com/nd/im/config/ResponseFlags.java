@@ -7,9 +7,9 @@ package com.nd.im.config;
 public class ResponseFlags {
 
     //用户id不存在
-    public final static String FAILURE_USER_ID_NOT_EXIST = "FAILURE_USER_ID_NOT_EXIST";
+    public final static String FAILURE_ID_NOT_EXIST = "FAILURE_ID_NOT_EXIST";
     //密码错误
     public final static String FAILURE_PASSWORD_ERROR = "FAILURE_PASSWORD_ERROR";
-    //userId已经被使用
-    public final static String FAILURE_USER_ID_USED = "FAILURE_USER_ID_USED";
+    //id已经被使用
+    public final static String FAILURE_ID_USED = "FAILURE_ID_USED";
 }

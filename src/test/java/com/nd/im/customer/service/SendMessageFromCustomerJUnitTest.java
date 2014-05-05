@@ -30,9 +30,9 @@ public class SendMessageFromCustomerJUnitTest extends AbstractImTest {
     public void test() {
         this.setCustomerSession("1158174740");
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("receiveId", "271411");
+        parameterMap.put("serviceId", "271411");
         parameterMap.put("message", "hello 271411");
-        String result = this.testHandler.execute(ActionNames.SEND_MESSAGE_FROME_CUSTOMER, parameterMap);
+        String result = this.testHandler.execute(ActionNames.SEND_MESSAGE_FROM_CUSTOMER, parameterMap);
         System.out.println(result);
     }
 }

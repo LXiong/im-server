@@ -41,13 +41,13 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
         inquirePageContext.setPageIndex(1);
         List<String> keyList = this.customerEntityDao.inquireKeys(inquirePageContext);
         CustomerEntity entity = this.customerEntityDao.inquireByKey(keyList.get(0));
-        this.customerEntityDao.updateKeySorce(entity.getUserId(), System.currentTimeMillis());
+        this.customerEntityDao.updateKeySorce(entity.getCustomerId(), System.currentTimeMillis());
         return entity;
     }
 
     @Override
-    public CustomerEntity inquireCustomerByUserId(String userId) {
-        return this.customerEntityDao.inquireByKey(userId);
+    public CustomerEntity inquireCustomerById(String customerId) {
+        return this.customerEntityDao.inquireByKey(customerId);
     }
 
     @Override
@@ -56,17 +56,17 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     }
 
     @Override
-    public void insertCustomerWait(String userId, String nickName, String createTime) {
+    public void insertCustomerWait(String customerId, String customerName, String createTime) {
         Map<String, String> entityMap = new HashMap<String, String>(4, 1);
-        entityMap.put("userId", userId);
-        entityMap.put("nickName", nickName);
+        entityMap.put("customerId", customerId);
+        entityMap.put("customerName", customerName);
         entityMap.put("createTime", createTime);
         this.customerWaitEntityDao.insert(entityMap);
     }
 
     @Override
-    public CustomerWaitEntity inquireCustomerWaitByUserId(String userId) {
-        return this.customerWaitEntityDao.inquireByKey(userId);
+    public CustomerWaitEntity inquireCustomerWaitById(String customerId) {
+        return this.customerWaitEntityDao.inquireByKey(customerId);
     }
 
     @Override
@@ -78,14 +78,14 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
         List<CustomerWaitEntity> customerWaitEntityList = this.customerWaitEntityDao.inquire(inquirePageContext);
         if (customerWaitEntityList.isEmpty() == false) {
             customerWaitEntity = customerWaitEntityList.get(0);
-            this.customerWaitEntityDao.delete(customerWaitEntity.getUserId());
+            this.customerWaitEntityDao.delete(customerWaitEntity.getCustomerId());
         }
         return customerWaitEntity;
     }
 
     @Override
-    public void deleteCustomerWait(String userId) {
-        this.customerWaitEntityDao.delete(userId);
+    public void deleteCustomerWait(String customerId) {
+        this.customerWaitEntityDao.delete(customerId);
     }
 
     @Override

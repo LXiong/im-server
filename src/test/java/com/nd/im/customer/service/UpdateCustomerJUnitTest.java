@@ -12,9 +12,9 @@ import org.junit.Test;
  *
  * @author aladdin
  */
-public class CustomerLoginJUnitTest extends AbstractImTest {
+public class UpdateCustomerJUnitTest extends AbstractImTest {
 
-    public CustomerLoginJUnitTest() {
+    public UpdateCustomerJUnitTest() {
     }
 
     @Before
@@ -29,8 +29,7 @@ public class CustomerLoginJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("customerId", "1158174740");
-        String result = this.testHandler.execute(ActionNames.CUSTOMER_LOGIN, parameterMap);
+        String result = this.testHandler.execute(ActionNames.UPDATE, parameterMap);
         System.out.println(result);
     }
 }

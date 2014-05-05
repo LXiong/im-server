@@ -2,7 +2,7 @@ package com.nd.im.localservice;
 
 import com.nd.im.entity.ServiceEntity;
 import com.nd.im.entity.ServiceOnlineEntity;
-import com.nd.im.entity.UserTypeEnum;
+import com.nd.im.entity.ServiceTypeEnum;
 import com.wolf.framework.dao.REntityDao;
 import com.wolf.framework.dao.annotation.InjectRDao;
 import com.wolf.framework.dao.condition.InquirePageContext;
@@ -34,9 +34,9 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
         if (adminUserEntity == null) {
             //管理员用户不存在，初始化
             Map<String, String> entityMap = new HashMap<String, String>(4, 1);
-            entityMap.put("userId", ServiceLocalService.adminUserId);
-            entityMap.put("userName", ServiceLocalService.adminUserName);
-            entityMap.put("type", UserTypeEnum.ADMIN.name());
+            entityMap.put("serviceId", ServiceLocalService.adminUserId);
+            entityMap.put("serviceName", ServiceLocalService.adminUserName);
+            entityMap.put("type", ServiceTypeEnum.ADMIN.name());
             entityMap.put("password", SecurityUtils.encryptByMd5(ServiceLocalService.adminUserName));
             this.serviceEntityDao.insert(entityMap);
         }
@@ -48,8 +48,13 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
     }
 
     @Override
-    public ServiceEntity inquireServiceByUserId(String userId) {
-        return this.serviceEntityDao.inquireByKey(userId);
+    public ServiceEntity inquireServiceById(String serviceId) {
+        return this.serviceEntityDao.inquireByKey(serviceId);
+    }
+    
+    @Override
+    public void deleteService(String serviceId) {
+        this.serviceEntityDao.delete(serviceId);
     }
 
     @Override
@@ -81,8 +86,8 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
     }
 
     @Override
-    public void offline(String userId) {
-        this.serviceOnlineEntityDao.delete(userId);
+    public void offline(String serviceId) {
+        this.serviceOnlineEntityDao.delete(serviceId);
     }
 
     @Override
@@ -96,7 +101,7 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
             entity = null;
         } else {
             entity = entityList.get(0);
-            this.serviceOnlineEntityDao.updateKeySorce(entity.getUserId(), System.currentTimeMillis());
+            this.serviceOnlineEntityDao.updateKeySorce(entity.getServiceId(), System.currentTimeMillis());
         }
         return entity;
     }

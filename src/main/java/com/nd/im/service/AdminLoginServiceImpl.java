@@ -24,12 +24,12 @@ import com.wolf.framework.worker.context.MessageContext;
 @ServiceConfig(
         actionName = ActionNames.ADMIN_LOGIN,
         importantParameter = {
-    @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
+    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
     @InputConfig(name = "password", typeEnum = TypeEnum.CHAR_32, desc = "密码")
 },
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
+    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
+    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
     @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
 },
         validateSession = false,
@@ -44,13 +44,13 @@ public class AdminLoginServiceImpl implements Service {
 
     @Override
     public void execute(MessageContext messageContext) {
-        String userId = messageContext.getParameter("userId");
+        String serviceId = messageContext.getParameter("serviceId");
         String password = messageContext.getParameter("password");
-        if (userId.equals(ServiceLocalService.adminUserId)) {
-            ServiceEntity adminUserEntity = this.serviceUserLocalService.inquireServiceByUserId(userId);
+        if (serviceId.equals(ServiceLocalService.adminUserId)) {
+            ServiceEntity adminUserEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
             if (adminUserEntity.getPassword().equals(password)) {
                 //登录成功
-                String sid = SessionUtils.createServiceSessionId(userId);
+                String sid = SessionUtils.createServiceSessionId(serviceId);
                 Session session = new SessionImpl(sid);
                 messageContext.setNewSession(session);
                 messageContext.setEntityData(adminUserEntity);
@@ -59,7 +59,7 @@ public class AdminLoginServiceImpl implements Service {
                 messageContext.setFlag(ResponseFlags.FAILURE_PASSWORD_ERROR);
             }
         } else {
-            messageContext.setFlag(ResponseFlags.FAILURE_USER_ID_NOT_EXIST);
+            messageContext.setFlag(ResponseFlags.FAILURE_ID_NOT_EXIST);
         }
     }
 }

@@ -18,20 +18,20 @@ import java.util.Map;
 public final class CustomerWaitEntity extends Entity {
     
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客户用户id")
-    private String userId;
+    private String customerId;
     //
     @RColumnConfig(desc = "昵称")
-    private String nickName;
+    private String customerName;
     //
     @RColumnConfig(desc = "创建时间")
     private long createTime;
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getCustomerName() {
+        return customerName;
     }
 
     public long getCreateTime() {
@@ -40,22 +40,22 @@ public final class CustomerWaitEntity extends Entity {
 
     @Override
     public String getKeyValue() {
-        return this.userId;
+        return this.customerId;
     }
 
     @Override
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<String, String>(4, 1);
-        map.put("userId", this.userId);
-        map.put("nickName", this.nickName);
+        map.put("customerId", this.customerId);
+        map.put("customerName", this.customerName);
         map.put("createTime", Long.toString(this.createTime));
         return map;
     }
 
     @Override
     protected void parseMap(Map<String, String> entityMap) {
-        this.userId = entityMap.get("userId");
-        this.nickName = entityMap.get("nickName");
+        this.customerId = entityMap.get("customerId");
+        this.customerName = entityMap.get("customerName");
         this.createTime = Long.parseLong(entityMap.get("createTime"));
     }
 }

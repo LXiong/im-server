@@ -29,7 +29,7 @@ public class ServiceLoginJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("userId", "271411");
+        parameterMap.put("serviceId", "271411");
         String result = this.testHandler.execute(ActionNames.SERVICE_LOGIN, parameterMap);
         System.out.println(result);
     }

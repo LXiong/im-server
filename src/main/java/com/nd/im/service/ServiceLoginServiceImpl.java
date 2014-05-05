@@ -24,18 +24,18 @@ import com.wolf.framework.worker.context.MessageContext;
 @ServiceConfig(
         actionName = ActionNames.SERVICE_LOGIN,
         importantParameter = {
-    @InputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id")
+    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
 },
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
+    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
+    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
     @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
 },
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
         response = true,
         group = ActionGroupNames.IM,
-        description = "用户登录")
+        description = "客服登录")
 public class ServiceLoginServiceImpl implements Service {
 
     @InjectLocalService()
@@ -43,10 +43,10 @@ public class ServiceLoginServiceImpl implements Service {
 
     @Override
     public void execute(MessageContext messageContext) {
-        String userId = messageContext.getParameter("userId");
-        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceByUserId(userId);
+        String serviceId = messageContext.getParameter("serviceId");
+        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
         if (userEntity != null) {
-            String sid = SessionUtils.createServiceSessionId(userId);
+            String sid = SessionUtils.createServiceSessionId(serviceId);
             Session session = new SessionImpl(sid);
             messageContext.setNewSession(session);
             messageContext.setEntityData(userEntity);
@@ -54,7 +54,7 @@ public class ServiceLoginServiceImpl implements Service {
             //记录登录状态
             this.serviceUserLocalService.online(userEntity);
         } else {
-            messageContext.setFlag(ResponseFlags.FAILURE_USER_ID_NOT_EXIST);
+            messageContext.setFlag(ResponseFlags.FAILURE_ID_NOT_EXIST);
         }
     }
 }

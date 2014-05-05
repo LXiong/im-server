@@ -31,7 +31,7 @@ import java.util.Map;
     @InputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "客户排队序号")
 },
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
+    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
     @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
     @OutputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "客户排队序号")
 },
@@ -49,11 +49,11 @@ public class CustomerLogoutServiceImpl implements Service {
     @Override
     public void execute(MessageContext messageContext) {
         String sid = messageContext.getSession().getSid();
-        String userId = SessionUtils.getCustomerUserIdFromSessionId(sid);
+        String customerId = SessionUtils.getCustomerUserIdFromSessionId(sid);
         messageContext.setNewSession(null);
         String serviceId = messageContext.getParameter("serviceId");
         Map<String, String> resultMap = new HashMap<String, String>(2, 1);
-        resultMap.put("userId", userId);
+        resultMap.put("customerId", customerId);
         resultMap.put("serviceId", serviceId);
         resultMap.put("waitOrder", "-1");
         messageContext.setMapData(resultMap);
@@ -63,14 +63,14 @@ public class CustomerLogoutServiceImpl implements Service {
             String waitOrder = messageContext.getParameter("waitOrder");
             if (waitOrder != null) {
                 resultMap.put("waitOrder", waitOrder);
-                this.customerLocalService.deleteCustomerWait(userId);
+                this.customerLocalService.deleteCustomerWait(customerId);
                 //通知排队前50等待的客户,更新等待人数
                 List<CustomerWaitEntity> customerWaitEntityList = this.customerLocalService.inquireCustomerWait(1, 50);
                 if (customerWaitEntityList.isEmpty() == false) {
                     String customerSid;
                     List<String> customerSidList = new ArrayList<String>(customerWaitEntityList.size());
                     for (CustomerWaitEntity customerWaitEntity : customerWaitEntityList) {
-                        customerSid = SessionUtils.createCustomerSessionId(customerWaitEntity.getUserId());
+                        customerSid = SessionUtils.createCustomerSessionId(customerWaitEntity.getCustomerId());
                         customerSidList.add(customerSid);
                     }
                     messageContext.addBroadcastSidList(customerSidList);

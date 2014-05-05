@@ -19,7 +19,7 @@ import java.util.Map;
  * @author aladdin
  */
 @ServiceConfig(
-        actionName = ActionNames.SEND_MESSAGE_FROME_CUSTOMER,
+        actionName = ActionNames.SEND_MESSAGE_FROM_CUSTOMER,
         importantParameter = {
     @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
     @InputConfig(name = "message", typeEnum = TypeEnum.CHAR_255, desc = "消息")

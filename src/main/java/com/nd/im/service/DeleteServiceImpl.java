@@ -20,22 +20,18 @@ import java.util.Map;
  * @author aladdin
  */
 @ServiceConfig(
-        actionName = ActionNames.INSERT_SERVICE,
+        actionName = ActionNames.DELETE_SERVICE,
         importantParameter = {
-    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @InputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "客服名称"),
-    @InputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
+    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
 },
         returnParameter = {
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
-    @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
+    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
 },
         validateSession = true,
         response = true,
         group = ActionGroupNames.IM,
-        description = "新增客服帐号")
-public class InsertServiceImpl implements Service {
+        description = "删除客服帐号")
+public class DeleteServiceImpl implements Service {
 
     @InjectLocalService()
     private ServiceLocalService serviceUserLocalService;
@@ -44,14 +40,8 @@ public class InsertServiceImpl implements Service {
     public void execute(MessageContext messageContext) {
         Map<String, String> parameterMap = messageContext.getParameterMap();
         String serviceId = parameterMap.get("serviceId");
-        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
-        if(userEntity == null) {
-            parameterMap.put("password", SecurityUtils.encryptByMd5(serviceId));
-            this.serviceUserLocalService.insertService(parameterMap);
-            messageContext.setMapData(parameterMap);
-            messageContext.success();
-        } else {
-            messageContext.setFlag(ResponseFlags.FAILURE_ID_USED);
-        }
+        this.serviceUserLocalService.deleteService(serviceId);
+        messageContext.setMapData(parameterMap);
+        messageContext.success();
     }
 }

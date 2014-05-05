@@ -21,15 +21,15 @@ import com.wolf.framework.worker.context.MessageContext;
 @ServiceConfig(
         actionName = ActionNames.SERVICE_LOGOUT,
         returnParameter = {
-    @OutputConfig(name = "userId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "userName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
+    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
+    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
     @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
 },
         validateSession = true,
         sessionHandleTypeEnum = SessionHandleTypeEnum.REMOVE,
         response = true,
         group = ActionGroupNames.IM,
-        description = "用户登出")
+        description = "客服登出")
 public class ServiceLogoutServiceImpl implements Service {
 
     @InjectLocalService()
@@ -38,13 +38,13 @@ public class ServiceLogoutServiceImpl implements Service {
     @Override
     public void execute(MessageContext messageContext) {
         Session session = messageContext.getSession();
-        String userId = SessionUtils.getServiceUserIdFromSessionId(session.getSid());
-        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceByUserId(userId);
+        String serviceId = SessionUtils.getServiceUserIdFromSessionId(session.getSid());
+        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
         if (userEntity != null) {
             messageContext.setEntityData(userEntity);
             messageContext.success();
             //记录登出状态
-            this.serviceUserLocalService.offline(userEntity.getUserId());
+            this.serviceUserLocalService.offline(userEntity.getServiceId());
         }
     }
 }
