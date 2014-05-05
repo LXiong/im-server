@@ -12,9 +12,9 @@ import org.junit.Test;
  *
  * @author aladdin
  */
-public class ServiceLogoutJUnitTest extends AbstractImTest {
+public class InquireServiceJUnitTest extends AbstractImTest {
 
-    public ServiceLogoutJUnitTest() {
+    public InquireServiceJUnitTest() {
     }
 
     @Before
@@ -28,9 +28,9 @@ public class ServiceLogoutJUnitTest extends AbstractImTest {
 
     @Test
     public void test() {
-        this.setServiceSession("271411");
+        this.setServiceSession("10000");
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        String result = this.testHandler.execute(ActionNames.SERVICE_LOGOUT, parameterMap);
+        String result = this.testHandler.execute(ActionNames.INQUIRE_SERVICE, parameterMap);
         System.out.println(result);
     }
 }

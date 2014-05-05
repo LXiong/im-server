@@ -2,7 +2,7 @@ package com.nd.im.service;
 
 import com.nd.im.AbstractImTest;
 import com.nd.im.config.ActionNames;
-import com.nd.im.localservice.ServiceUserLocalService;
+import com.nd.im.localservice.ServiceLocalService;
 import com.wolf.framework.utils.SecurityUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class AdminLoginJUnitTest extends AbstractImTest {
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
         parameterMap.put("userId", "10000");
-        parameterMap.put("password", SecurityUtils.encryptByMd5(ServiceUserLocalService.adminUserName));
+        parameterMap.put("password", SecurityUtils.encryptByMd5(ServiceLocalService.adminUserName));
         String result = this.testHandler.execute(ActionNames.ADMIN_LOGIN, parameterMap);
         System.out.println(result);
     }

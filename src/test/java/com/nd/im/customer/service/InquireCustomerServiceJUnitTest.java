@@ -1,4 +1,4 @@
-package com.nd.im.service;
+package com.nd.im.customer.service;
 
 import com.nd.im.AbstractImTest;
 import com.nd.im.config.ActionNames;
@@ -12,9 +12,9 @@ import org.junit.Test;
  *
  * @author aladdin
  */
-public class ServiceLogoutJUnitTest extends AbstractImTest {
+public class InquireCustomerServiceJUnitTest extends AbstractImTest {
 
-    public ServiceLogoutJUnitTest() {
+    public InquireCustomerServiceJUnitTest() {
     }
 
     @Before
@@ -28,9 +28,8 @@ public class ServiceLogoutJUnitTest extends AbstractImTest {
 
     @Test
     public void test() {
-        this.setServiceSession("271411");
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        String result = this.testHandler.execute(ActionNames.SERVICE_LOGOUT, parameterMap);
+        String result = this.testHandler.execute(ActionNames.INQUIRE_CUSTOMER, parameterMap);
         System.out.println(result);
     }
 }

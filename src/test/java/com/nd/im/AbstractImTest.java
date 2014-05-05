@@ -1,5 +1,6 @@
 package com.nd.im;
 
+import com.nd.im.utils.SessionUtils;
 import com.wolf.framework.config.FrameworkConfig;
 import com.wolf.framework.context.ApplicationContext;
 import com.wolf.framework.session.Session;
@@ -29,12 +30,22 @@ public abstract class AbstractImTest {
         parameterMap.put(FrameworkConfig.REDIS_MIN_POOL_SIZE, "2");
         parameterMap.put("file.path", "/data/file");
         this.testHandler = new TestHandler(parameterMap);
-        Session session = new SessionImpl("271411");
-        this.testHandler.setSession(session);
     }
 
     @AfterClass
     public static void tearDownClass() {
         ApplicationContext.CONTEXT.contextDestroyed();
+    }
+
+    public final void setServiceSession(String userId) {
+        String sid = SessionUtils.createServiceSessionId(userId);
+        Session session = new SessionImpl(sid);
+        this.testHandler.setSession(session);
+    }
+
+    public final void setCustomerSession(String userId) {
+        String sid = SessionUtils.createCustomerSessionId(userId);
+        Session session = new SessionImpl(sid);
+        this.testHandler.setSession(session);
     }
 }

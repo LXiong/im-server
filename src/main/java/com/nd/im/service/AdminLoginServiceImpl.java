@@ -3,8 +3,9 @@ package com.nd.im.service;
 import com.nd.im.config.ActionGroupNames;
 import com.nd.im.config.ActionNames;
 import com.nd.im.config.ResponseFlags;
-import com.nd.im.entity.ServiceUserEntity;
-import com.nd.im.localservice.ServiceUserLocalService;
+import com.nd.im.entity.ServiceEntity;
+import com.nd.im.localservice.ServiceLocalService;
+import com.nd.im.utils.SessionUtils;
 import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
@@ -39,17 +40,18 @@ import com.wolf.framework.worker.context.MessageContext;
 public class AdminLoginServiceImpl implements Service {
 
     @InjectLocalService()
-    private ServiceUserLocalService serviceUserLocalService;
+    private ServiceLocalService serviceUserLocalService;
 
     @Override
     public void execute(MessageContext messageContext) {
         String userId = messageContext.getParameter("userId");
         String password = messageContext.getParameter("password");
-        if (userId.equals(ServiceUserLocalService.adminUserId)) {
-            ServiceUserEntity adminUserEntity = this.serviceUserLocalService.inquireServerUserByUserId(userId);
+        if (userId.equals(ServiceLocalService.adminUserId)) {
+            ServiceEntity adminUserEntity = this.serviceUserLocalService.inquireServiceByUserId(userId);
             if (adminUserEntity.getPassword().equals(password)) {
                 //登录成功
-                Session session = new SessionImpl(userId);
+                String sid = SessionUtils.createServiceSessionId(userId);
+                Session session = new SessionImpl(sid);
                 messageContext.setNewSession(session);
                 messageContext.setEntityData(adminUserEntity);
                 messageContext.success();
