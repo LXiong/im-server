@@ -25,10 +25,8 @@ public class ActionNames {
     public final static String INQUIRE_SERVICE = "INQUIRE_SERVICE";
     //删除客服用户
     public final static String DELETE_SERVICE = "DELETE_SERVICE";
-    //获取下一个等待的客户
-    public final static String NEXT_CUSTOMER = "NEXT_CUSTOMER";
     //分配等待队列中的客户给客服
-    public final static String TIMER_ALLOT_CUSTOMER = "TIMER_ALLOT_CUSTOMER";
+    public final static String ALLOT_WAIT_CUSTOMER = "ALLOT_WAIT_CUSTOMER";
     //----------------------------客户接口---------------------------//
     //随机查询
     public final static String INQUIRE_CUSTOMER = "INQUIRE_CUSTOMER";

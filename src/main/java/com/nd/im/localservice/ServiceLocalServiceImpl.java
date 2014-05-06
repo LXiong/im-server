@@ -6,6 +6,7 @@ import com.nd.im.entity.ServiceTypeEnum;
 import com.wolf.framework.dao.REntityDao;
 import com.wolf.framework.dao.annotation.InjectRDao;
 import com.wolf.framework.dao.condition.InquirePageContext;
+import com.wolf.framework.dao.condition.InquireRedisIndexContext;
 import com.wolf.framework.local.LocalServiceConfig;
 import com.wolf.framework.utils.SecurityUtils;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
     public ServiceEntity inquireServiceById(String serviceId) {
         return this.serviceEntityDao.inquireByKey(serviceId);
     }
-    
+
     @Override
     public void deleteService(String serviceId) {
         this.serviceEntityDao.delete(serviceId);
@@ -92,5 +93,13 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
         entityMap.put("offMessage", offMessage);
         entityMap.put("state", "off");
         this.serviceStateEntityDao.update(entityMap);
+    }
+
+    @Override
+    public List<ServiceStateEntity> inquireOnService(long pageIndex, long pageSize) {
+        InquireRedisIndexContext inquirePageContext = new InquireRedisIndexContext("state", "on");
+        inquirePageContext.setPageSize(pageSize);
+        inquirePageContext.setPageIndex(pageIndex);
+        return this.serviceStateEntityDao.inquireByIndex(inquirePageContext);
     }
 }

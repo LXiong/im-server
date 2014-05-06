@@ -30,4 +30,6 @@ public interface ServiceLocalService extends Local {
     public void onService(ServiceEntity entity);
 
     public void offService(String serviceId, String offMessage);
+    
+    public List<ServiceStateEntity> inquireOnService(long pageIndex, long pageSize);
 }

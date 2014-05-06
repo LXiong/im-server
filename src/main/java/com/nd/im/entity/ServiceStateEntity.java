@@ -20,7 +20,7 @@ public final class ServiceStateEntity extends Entity {
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户id")
     private String serviceId;
     //
-    @RColumnConfig(desc = "状态:on,off")
+    @RColumnConfig(columnTypeEnum = ColumnTypeEnum.INDEX, desc = "状态:on,off")
     private String state;
     //
     @RColumnConfig(desc = "off状态原因")

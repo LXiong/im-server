@@ -91,8 +91,8 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     @Override
     public List<WaitCustomerEntity> inquireCustomerWait(long pageIndex, long pageSize) {
         InquirePageContext inquirePageContext = new InquirePageContext();
-        inquirePageContext.setPageSize(50);
-        inquirePageContext.setPageIndex(1);
+        inquirePageContext.setPageSize(pageSize);
+        inquirePageContext.setPageIndex(pageIndex);
         return this.customerWaitEntityDao.inquire(inquirePageContext);
     }
 }
