@@ -44,7 +44,7 @@ public class ServiceLogoutServiceImpl implements Service {
             messageContext.setEntityData(userEntity);
             messageContext.success();
             //记录登出状态
-            this.serviceUserLocalService.offline(userEntity.getServiceId());
+            this.serviceUserLocalService.offService(userEntity.getServiceId(), "登出");
         }
     }
 }

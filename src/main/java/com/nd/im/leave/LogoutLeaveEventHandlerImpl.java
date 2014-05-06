@@ -28,7 +28,7 @@ public class LogoutLeaveEventHandlerImpl implements LeaveEventHandler {
         if(SessionUtils.isServiceSession(sid)) {
             //客服登出
             String serviceId = SessionUtils.getServiceUserIdFromSessionId(sid);
-            this.serviceUserLocalService.offline(serviceId);
+            this.serviceUserLocalService.offService(serviceId, "登出");
         } else {
             //客户登出
             String customerId = SessionUtils.getCustomerUserIdFromSessionId(sid);

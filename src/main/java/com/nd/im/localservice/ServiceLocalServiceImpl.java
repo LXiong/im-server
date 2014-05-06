@@ -1,7 +1,7 @@
 package com.nd.im.localservice;
 
 import com.nd.im.entity.ServiceEntity;
-import com.nd.im.entity.ServiceOnlineEntity;
+import com.nd.im.entity.ServiceStateEntity;
 import com.nd.im.entity.ServiceTypeEnum;
 import com.wolf.framework.dao.REntityDao;
 import com.wolf.framework.dao.annotation.InjectRDao;
@@ -24,8 +24,8 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
     @InjectRDao(clazz = ServiceEntity.class)
     private REntityDao<ServiceEntity> serviceEntityDao;
     //
-    @InjectRDao(clazz = ServiceOnlineEntity.class)
-    private REntityDao<ServiceOnlineEntity> serviceOnlineEntityDao;
+    @InjectRDao(clazz = ServiceStateEntity.class)
+    private REntityDao<ServiceStateEntity> serviceStateEntityDao;
 
     @Override
     public void init() {
@@ -79,30 +79,18 @@ public class ServiceLocalServiceImpl implements ServiceLocalService {
     }
 
     @Override
-    public void online(ServiceEntity entity) {
+    public void onService(ServiceEntity entity) {
         Map<String, String> entityMap = entity.toMap();
-        entityMap.put("state", "ON");
-        this.serviceOnlineEntityDao.insert(entityMap);
+        entityMap.put("state", "on");
+        this.serviceStateEntityDao.insert(entityMap);
     }
 
     @Override
-    public void offline(String serviceId) {
-        this.serviceOnlineEntityDao.delete(serviceId);
-    }
-
-    @Override
-    public synchronized ServiceOnlineEntity inquireOnlineService() {
-        InquirePageContext inquirePageContext = new InquirePageContext();
-        inquirePageContext.setPageSize(1);
-        inquirePageContext.setPageIndex(1);
-        List<ServiceOnlineEntity> entityList = this.serviceOnlineEntityDao.inquire(inquirePageContext);
-        ServiceOnlineEntity entity;
-        if (entityList.isEmpty()) {
-            entity = null;
-        } else {
-            entity = entityList.get(0);
-            this.serviceOnlineEntityDao.updateKeySorce(entity.getServiceId(), System.currentTimeMillis());
-        }
-        return entity;
+    public void offService(String serviceId, String offMessage) {
+        Map<String, String> entityMap = new HashMap<String, String>(4, 1);
+        entityMap.put("serviceId", serviceId);
+        entityMap.put("offMessage", offMessage);
+        entityMap.put("state", "off");
+        this.serviceStateEntityDao.update(entityMap);
     }
 }

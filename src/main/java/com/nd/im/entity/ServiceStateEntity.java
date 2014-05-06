@@ -14,14 +14,17 @@ import java.util.Map;
  * @author aladdin
  */
 @RDaoConfig(
-        tableName = TableNames.SERVICE_ONLINE)
-public final class ServiceOnlineEntity extends Entity {
+        tableName = TableNames.SERVICE_STATE)
+public final class ServiceStateEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户id")
     private String serviceId;
     //
-    @RColumnConfig(desc = "状态")
+    @RColumnConfig(desc = "状态:on,off")
     private String state;
+    //
+    @RColumnConfig(desc = "off状态原因")
+    private String offMessage;
     //
     @RColumnConfig(desc = "名称")
     private String serviceName;

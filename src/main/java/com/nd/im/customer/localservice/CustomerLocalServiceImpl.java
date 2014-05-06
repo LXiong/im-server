@@ -1,7 +1,7 @@
 package com.nd.im.customer.localservice;
 
 import com.nd.im.customer.entity.CustomerEntity;
-import com.nd.im.customer.entity.CustomerWaitEntity;
+import com.nd.im.customer.entity.WaitCustomerEntity;
 import com.wolf.framework.dao.REntityDao;
 import com.wolf.framework.dao.annotation.InjectRDao;
 import com.wolf.framework.dao.condition.InquirePageContext;
@@ -22,8 +22,8 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     @InjectRDao(clazz = CustomerEntity.class)
     private REntityDao<CustomerEntity> customerEntityDao;
     //
-    @InjectRDao(clazz = CustomerWaitEntity.class)
-    private REntityDao<CustomerWaitEntity> customerWaitEntityDao;
+    @InjectRDao(clazz = WaitCustomerEntity.class)
+    private REntityDao<WaitCustomerEntity> customerWaitEntityDao;
 
     @Override
     public void init() {
@@ -51,12 +51,12 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     }
 
     @Override
-    public long countCustomerWaitNum() {
+    public long countWaitCustomerNum() {
         return this.customerWaitEntityDao.count();
     }
 
     @Override
-    public void insertCustomerWait(String customerId, String customerName, String createTime) {
+    public void insertWaitCustomer(String customerId, String customerName, String createTime) {
         Map<String, String> entityMap = new HashMap<String, String>(4, 1);
         entityMap.put("customerId", customerId);
         entityMap.put("customerName", customerName);
@@ -65,17 +65,17 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     }
 
     @Override
-    public CustomerWaitEntity inquireCustomerWaitById(String customerId) {
+    public WaitCustomerEntity inquireWaitCustomerById(String customerId) {
         return this.customerWaitEntityDao.inquireByKey(customerId);
     }
 
     @Override
-    public synchronized CustomerWaitEntity nextCustomerWait() {
-        CustomerWaitEntity customerWaitEntity = null;
+    public synchronized WaitCustomerEntity nextWaitCustomer() {
+        WaitCustomerEntity customerWaitEntity = null;
         InquirePageContext inquirePageContext = new InquirePageContext();
         inquirePageContext.setPageSize(1);
         inquirePageContext.setPageIndex(1);
-        List<CustomerWaitEntity> customerWaitEntityList = this.customerWaitEntityDao.inquire(inquirePageContext);
+        List<WaitCustomerEntity> customerWaitEntityList = this.customerWaitEntityDao.inquire(inquirePageContext);
         if (customerWaitEntityList.isEmpty() == false) {
             customerWaitEntity = customerWaitEntityList.get(0);
             this.customerWaitEntityDao.delete(customerWaitEntity.getCustomerId());
@@ -89,7 +89,7 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     }
 
     @Override
-    public List<CustomerWaitEntity> inquireCustomerWait(long pageIndex, long pageSize) {
+    public List<WaitCustomerEntity> inquireCustomerWait(long pageIndex, long pageSize) {
         InquirePageContext inquirePageContext = new InquirePageContext();
         inquirePageContext.setPageSize(50);
         inquirePageContext.setPageIndex(1);

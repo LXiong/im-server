@@ -14,8 +14,8 @@ import java.util.Map;
  * @author aladdin
  */
 @RDaoConfig(
-        tableName = TableNames.CUSTOMER_WAIT)
-public final class CustomerWaitEntity extends Entity {
+        tableName = TableNames.WAIT_CUSTOMER)
+public final class WaitCustomerEntity extends Entity {
     
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客户用户id")
     private String customerId;

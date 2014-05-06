@@ -5,10 +5,10 @@ package com.nd.im.config;
  * @author aladdin
  */
 public class ActionNames {
+
     public final static String UPDATE = "UPDATE";
     //-----------------------文件------------------------//
     //保存图片
-
     public final static String INSERT_IMAGE = "INSERT_IMAGE";
     //根据imageId查询图片数据
     public final static String INQUIRE_IMAGE_BY_KEY = "INQUIRE_IMAGE_BY_KEY";
@@ -27,6 +27,8 @@ public class ActionNames {
     public final static String DELETE_SERVICE = "DELETE_SERVICE";
     //获取下一个等待的客户
     public final static String NEXT_CUSTOMER = "NEXT_CUSTOMER";
+    //分配等待队列中的客户给客服
+    public final static String TIMER_ALLOT_CUSTOMER = "TIMER_ALLOT_CUSTOMER";
     //----------------------------客户接口---------------------------//
     //随机查询
     public final static String INQUIRE_CUSTOMER = "INQUIRE_CUSTOMER";

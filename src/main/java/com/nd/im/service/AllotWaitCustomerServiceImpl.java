@@ -21,7 +21,7 @@ import java.util.Map;
  * @author jianying9
  */
 @ServiceConfig(
-        actionName = ActionNames.NEXT_CUSTOMER,
+        actionName = ActionNames.TIMER_ALLOT_CUSTOMER,
         returnParameter = {
     @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
     @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
@@ -32,7 +32,7 @@ import java.util.Map;
         response = true,
         group = ActionGroupNames.IM,
         description = "获取下以下等待的客户")
-public class NextCustomerServiceImpl implements Service {
+public class AllotWaitCustomerServiceImpl implements Service {
 
     @InjectLocalService()
     private ServiceLocalService serviceUserLocalService;
@@ -56,8 +56,8 @@ public class NextCustomerServiceImpl implements Service {
             String customerSid = SessionUtils.createCustomerSessionId(customerWaitEntity.getCustomerId());
             messageContext.success();
             //
-            String message = messageContext.getResponseMessage();
-            messageContext.push(customerSid, message);
+            String responseMessage = messageContext.getResponseMessage();
+            messageContext.push(customerSid, responseMessage);
         }
     }
 }

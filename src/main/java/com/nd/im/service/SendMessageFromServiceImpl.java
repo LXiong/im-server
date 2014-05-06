@@ -35,7 +35,6 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        broadcast = true,
         group = ActionGroupNames.IM,
         description = "客户发送消息至客服")
 public class SendMessageFromServiceImpl implements Service {
@@ -54,7 +53,9 @@ public class SendMessageFromServiceImpl implements Service {
         MessageEntity messageEntity = this.messageLocalService.insertTextMessageFormService(serviceId, customerId, message);
         messageContext.setEntityData(messageEntity);
         String customerSid = SessionUtils.createCustomerSessionId(customerId);
-        messageContext.addBroadcastSid(customerSid);
         messageContext.success();
+        //
+        String responseMessage = messageContext.getResponseMessage();
+        messageContext.push(customerSid, responseMessage);
     }
 }

@@ -44,15 +44,15 @@ public class ServiceLoginServiceImpl implements Service {
     @Override
     public void execute(MessageContext messageContext) {
         String serviceId = messageContext.getParameter("serviceId");
-        ServiceEntity userEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
-        if (userEntity != null) {
+        ServiceEntity serviceEntity = this.serviceUserLocalService.inquireServiceById(serviceId);
+        if (serviceEntity != null) {
             String sid = SessionUtils.createServiceSessionId(serviceId);
             Session session = new SessionImpl(sid);
             messageContext.setNewSession(session);
-            messageContext.setEntityData(userEntity);
+            messageContext.setEntityData(serviceEntity);
             messageContext.success();
             //记录登录状态
-            this.serviceUserLocalService.online(userEntity);
+            this.serviceUserLocalService.onService(serviceEntity);
         } else {
             messageContext.setFlag(ResponseFlags.FAILURE_ID_NOT_EXIST);
         }

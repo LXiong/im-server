@@ -1,7 +1,7 @@
 package com.nd.im.localservice;
 
 import com.nd.im.entity.ServiceEntity;
-import com.nd.im.entity.ServiceOnlineEntity;
+import com.nd.im.entity.ServiceStateEntity;
 import com.wolf.framework.local.Local;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +27,7 @@ public interface ServiceLocalService extends Local {
 
     public long countService();
 
-    public void online(ServiceEntity entity);
+    public void onService(ServiceEntity entity);
 
-    public void offline(String serviceId);
-
-    public ServiceOnlineEntity inquireOnlineService();
+    public void offService(String serviceId, String offMessage);
 }

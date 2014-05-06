@@ -28,7 +28,6 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        broadcast = true,
         group = ActionGroupNames.IM,
         description = "加入等待队列")
 public class CustomerWaitServiceImpl implements Service {
@@ -42,9 +41,9 @@ public class CustomerWaitServiceImpl implements Service {
         String customerId = SessionUtils.getCustomerUserIdFromSessionId(sid);
         CustomerEntity customerEntity = this.customerLocalService.inquireCustomerById(customerId);
         String customerName = customerEntity.getCustomerName();
-        long waitNum = this.customerLocalService.countCustomerWaitNum();
+        long waitNum = this.customerLocalService.countWaitCustomerNum();
         String createTime = Long.toString(System.currentTimeMillis());
-        this.customerLocalService.insertCustomerWait(customerId, customerName, createTime);
+        this.customerLocalService.insertWaitCustomer(customerId, customerName, createTime);
         Map<String, String> resultMap = new HashMap<String, String>(4, 1);
         resultMap.put("customerId", customerId);
         resultMap.put("nickName", customerName);
