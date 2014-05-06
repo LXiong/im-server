@@ -24,8 +24,6 @@ public interface CustomerLocalService extends Local {
     
     public WaitCustomerEntity inquireWaitCustomerById(String customerId);
 
-    public WaitCustomerEntity nextWaitCustomer();
-    
     public void deleteCustomerWait(String customerId);
     
     public List<WaitCustomerEntity> inquireCustomerWait(long pageIndex, long pageSize);

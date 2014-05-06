@@ -23,8 +23,8 @@ public final class WaitCustomerEntity extends Entity {
     @RColumnConfig(desc = "昵称")
     private String customerName;
     //
-    @RColumnConfig(desc = "创建时间")
-    private long createTime;
+    @RColumnConfig(desc = "排队序号")
+    private long waitOrder;
 
     public String getCustomerId() {
         return customerId;
@@ -34,8 +34,8 @@ public final class WaitCustomerEntity extends Entity {
         return customerName;
     }
 
-    public long getCreateTime() {
-        return createTime;
+    public long getWaitOrder() {
+        return waitOrder;
     }
 
     @Override
@@ -48,7 +48,7 @@ public final class WaitCustomerEntity extends Entity {
         Map<String, String> map = new HashMap<String, String>(4, 1);
         map.put("customerId", this.customerId);
         map.put("customerName", this.customerName);
-        map.put("createTime", Long.toString(this.createTime));
+        map.put("waitOrder", Long.toString(this.waitOrder));
         return map;
     }
 
@@ -56,6 +56,6 @@ public final class WaitCustomerEntity extends Entity {
     protected void parseMap(Map<String, String> entityMap) {
         this.customerId = entityMap.get("customerId");
         this.customerName = entityMap.get("customerName");
-        this.createTime = Long.parseLong(entityMap.get("createTime"));
+        this.waitOrder = Long.parseLong(entityMap.get("waitOrder"));
     }
 }

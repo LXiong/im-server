@@ -42,13 +42,13 @@ public class CustomerWaitServiceImpl implements Service {
         CustomerEntity customerEntity = this.customerLocalService.inquireCustomerById(customerId);
         String customerName = customerEntity.getCustomerName();
         long waitNum = this.customerLocalService.countWaitCustomerNum();
-        String createTime = Long.toString(System.currentTimeMillis());
-        this.customerLocalService.insertWaitCustomer(customerId, customerName, createTime);
+        String waitOrder = Long.toString(System.currentTimeMillis());
+        this.customerLocalService.insertWaitCustomer(customerId, customerName, waitOrder);
         Map<String, String> resultMap = new HashMap<String, String>(4, 1);
         resultMap.put("customerId", customerId);
         resultMap.put("nickName", customerName);
         resultMap.put("waitNum", Long.toString(waitNum));
-        resultMap.put("waitOrder", createTime);
+        resultMap.put("waitOrder", waitOrder);
         messageContext.setMapData(resultMap);
         messageContext.success();
     }

@@ -56,31 +56,17 @@ public class CustomerLocalServiceImpl implements CustomerLocalService {
     }
 
     @Override
-    public void insertWaitCustomer(String customerId, String customerName, String createTime) {
+    public void insertWaitCustomer(String customerId, String customerName, String waitOrder) {
         Map<String, String> entityMap = new HashMap<String, String>(4, 1);
         entityMap.put("customerId", customerId);
         entityMap.put("customerName", customerName);
-        entityMap.put("createTime", createTime);
+        entityMap.put("waitOrder", waitOrder);
         this.customerWaitEntityDao.insert(entityMap);
     }
 
     @Override
     public WaitCustomerEntity inquireWaitCustomerById(String customerId) {
         return this.customerWaitEntityDao.inquireByKey(customerId);
-    }
-
-    @Override
-    public synchronized WaitCustomerEntity nextWaitCustomer() {
-        WaitCustomerEntity customerWaitEntity = null;
-        InquirePageContext inquirePageContext = new InquirePageContext();
-        inquirePageContext.setPageSize(1);
-        inquirePageContext.setPageIndex(1);
-        List<WaitCustomerEntity> customerWaitEntityList = this.customerWaitEntityDao.inquire(inquirePageContext);
-        if (customerWaitEntityList.isEmpty() == false) {
-            customerWaitEntity = customerWaitEntityList.get(0);
-            this.customerWaitEntityDao.delete(customerWaitEntity.getCustomerId());
-        }
-        return customerWaitEntity;
     }
 
     @Override

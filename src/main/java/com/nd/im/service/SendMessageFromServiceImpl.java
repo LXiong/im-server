@@ -28,7 +28,7 @@ import java.util.Map;
     @OutputConfig(name = "messageId", typeEnum = TypeEnum.CHAR_32, desc = "消息id"),
     @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
     @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @OutputConfig(name = "message", typeEnum = TypeEnum.CHAR_32, desc = "消息"),
+    @OutputConfig(name = "message", typeEnum = TypeEnum.CHAR_32, desc = "消息主体,文字类型为字符,图片和文件类型为路径"),
     @OutputConfig(name = "from", typeEnum = TypeEnum.CHAR_32, desc = "发起人,c:客户,s:客服"),
     @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型:text-文字,image-图片,file-文件"),
     @OutputConfig(name = "createTime", typeEnum = TypeEnum.DATE_TIME, desc = "发送时间")
