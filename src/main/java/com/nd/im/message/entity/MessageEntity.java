@@ -14,7 +14,8 @@ import java.util.Map;
  * @author jianying9
  */
 @RDaoConfig(
-        tableName = TableNames.MESSAGE)
+        tableName = TableNames.MESSAGE,
+        dbIndex = TableNames.MESSAGE_INDEX)
 public final class MessageEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "消息id")

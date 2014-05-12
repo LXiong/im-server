@@ -14,7 +14,8 @@ import java.util.Map;
  * @author aladdin
  */
 @RDaoConfig(
-        tableName = TableNames.SERVICE_STATE)
+        tableName = TableNames.SERVICE_STATE,
+        dbIndex = TableNames.SERVICE_STATE_INDEX)
 public final class ServiceStateEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "客服组用户id")

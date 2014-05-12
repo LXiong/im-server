@@ -5,7 +5,7 @@ import com.nd.im.key.localservice.KeyLocalService;
 import com.nd.im.message.entity.MessageEntity;
 import com.wolf.framework.dao.REntityDao;
 import com.wolf.framework.dao.annotation.InjectRDao;
-import com.wolf.framework.dao.condition.InquireRedisIndexContext;
+import com.wolf.framework.dao.condition.InquireIndexPageContext;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.local.LocalServiceConfig;
 import java.util.HashMap;
@@ -76,7 +76,7 @@ public class MessageLocalServiceImpl implements MessageLocalService {
 
     @Override
     public List<MessageEntity> inquireMessageByCustomerDESC(String customerId, long pageIndex, long pageSize) {
-        InquireRedisIndexContext inquirePageContext = new InquireRedisIndexContext("customerId", customerId);
+        InquireIndexPageContext inquirePageContext = new InquireIndexPageContext("customerId", customerId);
         inquirePageContext.setPageSize(1);
         inquirePageContext.setPageIndex(1);
         return this.messageEntityDao.inquireByIndexDESC(inquirePageContext);

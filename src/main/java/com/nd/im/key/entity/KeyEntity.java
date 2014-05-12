@@ -14,7 +14,8 @@ import java.util.Map;
  * @author aladdin
  */
 @RDaoConfig(
-        tableName = TableNames.KEY)
+        tableName = TableNames.KEY,
+        dbIndex = TableNames.KEY_INDEX)
 public final class KeyEntity extends Entity {
 
     @RColumnConfig(columnTypeEnum = ColumnTypeEnum.KEY, desc = "表名")

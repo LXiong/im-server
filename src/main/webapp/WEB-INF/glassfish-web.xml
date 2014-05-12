@@ -3,6 +3,7 @@
 <glassfish-web-app error-url="">
   <class-loader delegate="true"/>
   <parameter-encoding default-charset="UTF-8"/>
+  <context-root>/im-server</context-root>
   <session-config>
     <session-properties>
       <property name="enableCookies" value="false"/>
