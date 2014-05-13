@@ -34,7 +34,7 @@ import com.wolf.framework.worker.context.MessageContext;
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "客服登录")
 public class ServiceLoginServiceImpl implements Service {
 

@@ -28,7 +28,7 @@ import com.wolf.framework.worker.context.MessageContext;
         validateSession = true,
         sessionHandleTypeEnum = SessionHandleTypeEnum.REMOVE,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "客服登出")
 public class ServiceLogoutServiceImpl implements Service {
 

@@ -35,7 +35,7 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "客户发送消息至客服")
 public class SendMessageFromServiceImpl implements Service {
 

@@ -26,7 +26,7 @@ import java.util.List;
         validateSession = true,
         page = true,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "查询客服帐号")
 public class InquireServiceImpl implements Service {
 

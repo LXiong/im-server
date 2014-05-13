@@ -37,7 +37,7 @@ import java.util.Map;
         validateSession = true,
         sessionHandleTypeEnum = SessionHandleTypeEnum.REMOVE,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.CUSTOMER,
         description = "客户用户登出")
 public class CustomerLogoutServiceImpl implements Service {
 

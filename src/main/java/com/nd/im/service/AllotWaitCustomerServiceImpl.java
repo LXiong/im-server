@@ -36,7 +36,7 @@ import java.util.Map;
 },
         validateSession = false,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "分配等待队列中的客户")
 public class AllotWaitCustomerServiceImpl implements Service {
 

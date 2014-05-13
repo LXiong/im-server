@@ -35,7 +35,7 @@ import com.wolf.framework.worker.context.MessageContext;
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "管理员登录")
 public class AdminLoginServiceImpl implements Service {
 

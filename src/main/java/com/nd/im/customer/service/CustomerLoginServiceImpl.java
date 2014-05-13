@@ -33,7 +33,7 @@ import com.wolf.framework.worker.context.MessageContext;
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.CUSTOMER,
         description = "客户用户登录")
 public class CustomerLoginServiceImpl implements Service {
 

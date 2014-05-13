@@ -23,7 +23,7 @@ import com.wolf.framework.worker.context.MessageContext;
 },
         validateSession = false,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.CUSTOMER,
         description = "随机获取客户帐号")
 public class InquireCustomerServiceImpl implements Service {
 

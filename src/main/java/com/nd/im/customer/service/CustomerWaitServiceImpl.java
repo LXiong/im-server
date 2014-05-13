@@ -28,7 +28,7 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.CUSTOMER,
         description = "加入等待队列")
 public class CustomerWaitServiceImpl implements Service {
     

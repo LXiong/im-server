@@ -33,7 +33,7 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "新增客服帐号")
 public class InsertServiceImpl implements Service {
 

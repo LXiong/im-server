@@ -26,7 +26,7 @@ import java.util.Map;
 },
         validateSession = true,
         response = true,
-        group = ActionGroupNames.IM,
+        group = ActionGroupNames.SERVICE,
         description = "删除客服帐号")
 public class DeleteServiceImpl implements Service {
 
