@@ -11,8 +11,8 @@ import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
 import com.wolf.framework.service.SessionHandleTypeEnum;
-import com.wolf.framework.service.parameter.InputConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.RequestConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.session.Session;
 import com.wolf.framework.session.SessionImpl;
 import com.wolf.framework.worker.context.MessageContext;
@@ -23,12 +23,12 @@ import com.wolf.framework.worker.context.MessageContext;
  */
 @ServiceConfig(
         actionName = ActionNames.CUSTOMER_LOGIN,
-        importantParameter = {
-    @InputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id")
+        requestConfigs = {
+    @RequestConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id")
 },
-        returnParameter = {
-    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称")
+        responseConfigs = {
+    @ResponseConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @ResponseConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称")
 },
         validateSession = false,
         sessionHandleTypeEnum = SessionHandleTypeEnum.SAVE,

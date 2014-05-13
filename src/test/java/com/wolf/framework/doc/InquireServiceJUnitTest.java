@@ -28,7 +28,7 @@ public class InquireServiceJUnitTest extends AbstractImTest {
     @Test
     public void test() {
         Map<String, String> parameterMap = new HashMap<String, String>(2, 1);
-        parameterMap.put("groupName", "IM接口");
+        parameterMap.put("groupName", "客户接口");
         String result = this.testHandler.execute("WOLF_INQUIRE_SERVICE", parameterMap);
         System.out.println(result);
     }

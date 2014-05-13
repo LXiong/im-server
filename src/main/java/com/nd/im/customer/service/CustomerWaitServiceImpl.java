@@ -9,7 +9,7 @@ import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.worker.context.MessageContext;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +20,11 @@ import java.util.Map;
  */
 @ServiceConfig(
         actionName = ActionNames.CUSTOMER_WAIT,
-        returnParameter = {
-    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称"),
-    @OutputConfig(name = "waitNum", typeEnum = TypeEnum.LONG, desc = "等待人数"),
-    @OutputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "排队序号")
+        responseConfigs = {
+    @ResponseConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @ResponseConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "昵称"),
+    @ResponseConfig(name = "waitNum", typeEnum = TypeEnum.LONG, desc = "等待人数"),
+    @ResponseConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "排队序号")
 },
         validateSession = true,
         response = true,

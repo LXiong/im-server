@@ -11,7 +11,7 @@ import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.task.InjectTaskExecutor;
 import com.wolf.framework.task.Task;
 import com.wolf.framework.task.TaskExecutor;
@@ -26,13 +26,13 @@ import java.util.Map;
  */
 @ServiceConfig(
         actionName = ActionNames.ALLOT_WAIT_CUSTOMER,
-        returnParameter = {
-    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
-    @OutputConfig(name = "waitOrder", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "客服昵称"),
-    @OutputConfig(name = "state", typeEnum = TypeEnum.CHAR_32, desc = "调度服务状态:stop-停止,running-运行")
+        responseConfigs = {
+    @ResponseConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @ResponseConfig(name = "customerName", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
+    @ResponseConfig(name = "waitOrder", typeEnum = TypeEnum.CHAR_32, desc = "客户昵称"),
+    @ResponseConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
+    @ResponseConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "客服昵称"),
+    @ResponseConfig(name = "state", typeEnum = TypeEnum.CHAR_32, desc = "调度服务状态:stop-停止,running-运行")
 },
         validateSession = false,
         response = true,

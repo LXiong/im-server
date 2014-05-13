@@ -8,7 +8,7 @@ import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.worker.context.MessageContext;
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
  */
 @ServiceConfig(
         actionName = ActionNames.INQUIRE_SERVICE,
-        returnParameter = {
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
-    @OutputConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
-    @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
+        responseConfigs = {
+    @ResponseConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "用户id"),
+    @ResponseConfig(name = "serviceName", typeEnum = TypeEnum.CHAR_32, desc = "名称"),
+    @ResponseConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型")
 },
         validateSession = true,
         page = true,

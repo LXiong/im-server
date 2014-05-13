@@ -7,8 +7,8 @@ import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
-import com.wolf.framework.service.parameter.InputConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.RequestConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.worker.context.MessageContext;
 import java.util.Map;
 
@@ -18,11 +18,11 @@ import java.util.Map;
  */
 @ServiceConfig(
         actionName = ActionNames.DELETE_SERVICE,
-        importantParameter = {
-    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
+        requestConfigs = {
+    @RequestConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
 },
-        returnParameter = {
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
+        responseConfigs = {
+    @ResponseConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id")
 },
         validateSession = true,
         response = true,

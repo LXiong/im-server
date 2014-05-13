@@ -9,8 +9,8 @@ import com.wolf.framework.data.TypeEnum;
 import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
-import com.wolf.framework.service.parameter.InputConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.RequestConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.worker.context.MessageContext;
 import java.util.Map;
 
@@ -20,18 +20,18 @@ import java.util.Map;
  */
 @ServiceConfig(
         actionName = ActionNames.SEND_MESSAGE_FROM_SERVICE,
-        importantParameter = {
-    @InputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @InputConfig(name = "message", typeEnum = TypeEnum.CHAR_255, desc = "消息")
+        requestConfigs = {
+    @RequestConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @RequestConfig(name = "message", typeEnum = TypeEnum.CHAR_255, desc = "消息")
 },
-        returnParameter = {
-    @OutputConfig(name = "messageId", typeEnum = TypeEnum.CHAR_32, desc = "消息id"),
-    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @OutputConfig(name = "message", typeEnum = TypeEnum.CHAR_32, desc = "消息主体,文字类型为字符,图片和文件类型为路径"),
-    @OutputConfig(name = "from", typeEnum = TypeEnum.CHAR_32, desc = "发起人,c:客户,s:客服"),
-    @OutputConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型:text-文字,image-图片,file-文件"),
-    @OutputConfig(name = "createTime", typeEnum = TypeEnum.DATE_TIME, desc = "发送时间")
+        responseConfigs = {
+    @ResponseConfig(name = "messageId", typeEnum = TypeEnum.CHAR_32, desc = "消息id"),
+    @ResponseConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @ResponseConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
+    @ResponseConfig(name = "message", typeEnum = TypeEnum.CHAR_32, desc = "消息主体,文字类型为字符,图片和文件类型为路径"),
+    @ResponseConfig(name = "from", typeEnum = TypeEnum.CHAR_32, desc = "发起人,c:客户,s:客服"),
+    @ResponseConfig(name = "type", typeEnum = TypeEnum.CHAR_32, desc = "类型:text-文字,image-图片,file-文件"),
+    @ResponseConfig(name = "createTime", typeEnum = TypeEnum.DATE_TIME, desc = "发送时间")
 },
         validateSession = true,
         response = true,

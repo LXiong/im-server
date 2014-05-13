@@ -10,8 +10,8 @@ import com.wolf.framework.local.InjectLocalService;
 import com.wolf.framework.service.Service;
 import com.wolf.framework.service.ServiceConfig;
 import com.wolf.framework.service.SessionHandleTypeEnum;
-import com.wolf.framework.service.parameter.InputConfig;
-import com.wolf.framework.service.parameter.OutputConfig;
+import com.wolf.framework.service.parameter.RequestConfig;
+import com.wolf.framework.service.parameter.ResponseConfig;
 import com.wolf.framework.worker.context.MessageContext;
 import java.util.HashMap;
 import java.util.List;
@@ -23,16 +23,14 @@ import java.util.Map;
  */
 @ServiceConfig(
         actionName = ActionNames.CUSTOMER_LOGOUT,
-        importantParameter = {
-    @InputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id,-1代表还未分配客服")
+        requestConfigs = {
+    @RequestConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id,-1代表还未分配客服"),
+    @RequestConfig(name = "waitOrder", must = false, typeEnum = TypeEnum.LONG, desc = "客户排队序号")
 },
-        minorParameter = {
-    @InputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "客户排队序号")
-},
-        returnParameter = {
-    @OutputConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
-    @OutputConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
-    @OutputConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "客户排队序号")
+        responseConfigs = {
+    @ResponseConfig(name = "customerId", typeEnum = TypeEnum.CHAR_32, desc = "客户id"),
+    @ResponseConfig(name = "serviceId", typeEnum = TypeEnum.CHAR_32, desc = "客服id"),
+    @ResponseConfig(name = "waitOrder", typeEnum = TypeEnum.LONG, desc = "客户排队序号")
 },
         validateSession = true,
         sessionHandleTypeEnum = SessionHandleTypeEnum.REMOVE,
